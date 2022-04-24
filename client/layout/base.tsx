@@ -23,7 +23,7 @@ const Layout = ({ children, isLogged }: LayoutProps) => {
                 onClick={isLogged ? logout : undefined}
                 href={!isLogged ? "/auth" : undefined}
               >
-                {isLogged ? "Singout" : "Signin"}
+                {isLogged ? "Signout" : "Signin"}
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
