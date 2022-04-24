@@ -6,7 +6,7 @@ const DashBoard: NextPage = () => {
   const isLogged = user != null;
   return (
     <Layout isLogged={isLogged}>
-      {user ? <h1>DashBoard {user?.name}</h1> : "login first pls"}
+      {user ? <h1>Hello {user?.name}</h1> : "login first pls"}
     </Layout>
   );
 };

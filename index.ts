@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import express, { Request, Response } from "express";
 import { handleLogin, handleRegister } from "./auth";
-import { authenticateUser } from "./middleware/auth";
+import { authenticateHandler, authenticateUser } from "./middleware/auth";
 require("dotenv").config();
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -76,6 +76,34 @@ app.post("/auth/revoke", authenticateUser, (req: Request, res: Response) => {
   } catch (err) {
     return res.status(403).send({ revoked: false, error: err });
   }
+});
+
+app.post("/post", authenticateHandler, async (req, res) => {
+  const { title, body, authorId } = req.body;
+  try {
+    if (!title || !body || !authorId) {
+      throw Error("body not valid");
+    }
+    const post = await prisma.post.create({
+      data: {
+        body,
+        title,
+        authorId,
+      },
+    });
+    res.send({ post });
+  } catch (err) {
+    res.status(501).send(err);
+  }
+});
+
+app.get("/post", async (req, res) => {
+  const posts = await prisma.post.findMany({
+    include: {
+      author: true,
+    },
+  });
+  return res.send({ posts });
 });
 
 app.listen(port, () => {

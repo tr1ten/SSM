@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
-import { FormEvent, FormEventHandler, useRef } from "react";
+import { FormEventHandler, useRef } from "react";
+import Layout from "../../layout/base";
 
 const Auth: NextPage = () => {
   const nameRef = useRef<HTMLInputElement>(null);
@@ -30,15 +31,22 @@ const Auth: NextPage = () => {
     }
   };
   return (
-    <form method="POST" onSubmit={handleSubmit}>
-      <label htmlFor="name">Name</label>
-      <input ref={nameRef} name="name" id="name" />
-      <label htmlFor="email">Email</label>
-      <input ref={emailRef} type="email" name="email" id="email" />
-      <label htmlFor="password">Password</label>
-      <input ref={passwordRef} type="password" name="password" id="password" />
-      <input type="submit" value="Submit" />
-    </form>
+    <Layout isLogged={false}>
+      <form method="POST" onSubmit={handleSubmit}>
+        <label htmlFor="name">Name</label>
+        <input ref={nameRef} name="name" id="name" />
+        <label htmlFor="email">Email</label>
+        <input ref={emailRef} type="email" name="email" id="email" />
+        <label htmlFor="password">Password</label>
+        <input
+          ref={passwordRef}
+          type="password"
+          name="password"
+          id="password"
+        />
+        <input type="submit" value="Submit" />
+      </form>
+    </Layout>
   );
 };
 

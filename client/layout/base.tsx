@@ -16,7 +16,9 @@ const Layout = ({ children, isLogged }: LayoutProps) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+
               <Nav.Link
                 onClick={isLogged ? logout : undefined}
                 href={!isLogged ? "/auth" : undefined}
@@ -27,7 +29,7 @@ const Layout = ({ children, isLogged }: LayoutProps) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {children}
+      <div className="p-5">{children}</div>
     </div>
   );
 };
